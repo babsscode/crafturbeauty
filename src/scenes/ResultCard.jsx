@@ -45,7 +45,7 @@ const ResultCard = ({
       <div className="mb-4">
         <h4 className="font-semibold text-gray-800 mb-2 flex items-center group-hover:text-pink-600 transition-colors duration-200">
           <Sparkles className="w-4 h-4 text-pink-400 mr-2 group-hover:text-pink-500 transition-colors duration-200" />
-          DIY Ingredients
+          Ingredients
         </h4>
         <div className="flex flex-wrap gap-2">
           {item["DIY Ingredients"].map((ingredient, idx) => (

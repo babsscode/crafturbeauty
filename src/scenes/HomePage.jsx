@@ -209,7 +209,7 @@ const HomePage = () => {
         <div className="space-y-4">
           <h2 className="text-2xl font-bold text-gray-800 flex items-center">
             <Sparkles className="w-6 h-6 text-pink-400 mr-2" />
-            DIY Alternatives
+            Natural Alternatives
           </h2>
           {results.map((item, idx) => (
             <ResultCard
