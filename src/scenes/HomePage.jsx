@@ -137,7 +137,7 @@ const HomePage = () => {
               <Search strokeWidth={2.75} className="w-5 h-5 text-pink-400" />
             )}
             <h2 className="text-lg font-semibold text-gray-800">
-              {searchMode === 'url' ? 'paste video url' : 'find skincare recipes'}
+              {searchMode === 'url' ? 'paste video url' : 'search skincare'}
             </h2>
           </div>
           
