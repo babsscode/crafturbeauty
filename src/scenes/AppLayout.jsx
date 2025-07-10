@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, User, Sparkles } from 'lucide-react';
+import { Home, Sparkles, Bookmark } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const AppLayout = ({ children, activeTab, setActiveTab }) => {
@@ -54,7 +54,6 @@ const AppLayout = ({ children, activeTab, setActiveTab }) => {
               }`}
             >
               <Home className="w-6 h-6" />
-              <span className="text-xs font-medium">home</span>
             </button>
             
             <button
@@ -68,8 +67,7 @@ const AppLayout = ({ children, activeTab, setActiveTab }) => {
                   : 'text-gray-400 hover:text-pink-500'
               }`}
             >
-              <User className="w-6 h-6" />
-              <span className="text-xs font-medium">saved</span>
+              <Bookmark className="w-6 h-6" />
             </button>
           </div>
         </div>

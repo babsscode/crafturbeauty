@@ -123,7 +123,7 @@ const HomePage = () => {
     <div className="p-6 space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-red-600 bg-clip-text text-transparent mb-2">
-          generate a skincare recipe
+          generate recipes
         </h1>
         <p className="text-gray-600">making skincare clean and accessible 🌿</p>
       </div>
@@ -192,7 +192,7 @@ const HomePage = () => {
             ) : (
               <div className="flex items-center justify-center space-x-2">
                 <Sparkle strokeWidth={2.25} className="w-5 h-5"/>
-                <span>generate natural alternatives</span>
+                <span>generate</span>
               </div>
             )}
           </button>
