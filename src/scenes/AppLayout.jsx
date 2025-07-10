@@ -11,10 +11,20 @@ const AppLayout = ({ children, activeTab, setActiveTab }) => {
         <div className="w-full px-4 py-4 max-w-7xl mx-auto">
             <div className="flex items-center justify-start">
             <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-pink-400 to-red-500 rounded-full flex items-center justify-center">
+                <div  
+                  onClick={() => {
+                    setActiveTab('home');
+                    navigate('/home');
+                  }}
+              className="w-8 h-8 bg-gradient-to-r from-pink-400 to-red-500 rounded-full flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-red-600 bg-clip-text text-transparent">
+                <span
+                  onClick={() => {
+                    setActiveTab('home');
+                    navigate('/home');
+                  }} 
+                className="text-xl font-bold bg-gradient-to-r from-pink-500 to-red-600 bg-clip-text text-transparent">
                 craft ur beauty
                 </span>
             </div>
