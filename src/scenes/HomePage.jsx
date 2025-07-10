@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from './firebase';
-import { Share2, Search, Sparkles, Heart, Copy, Check } from 'lucide-react';
+import { Link, Sparkle, Sparkles, Heart, Copy, Check, Search } from 'lucide-react';
 import ResultCard from './ResultCard';
 import { useAuth } from '../AuthContext';
 
 const HomePage = () => {
   const { user } = useAuth();
-  const [url, setUrl] = useState('');
+  const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
   const [savedItems, setSavedItems] = useState([]);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const [searchMode, setSearchMode] = useState('url'); // 'url' or 'phrase'
 
   // Load saved items when component mounts
   useEffect(() => {
@@ -45,19 +46,22 @@ const HomePage = () => {
     }
   };
 
-  const handleUrlSubmit = async () => {
-    if (!url.trim()) return;
+  const handleSubmit = async () => {
+    if (!input.trim()) return;
 
     setLoading(true);
     setError('');
 
     try {
-      const response = await fetch('https://skincare-api-m8tt.onrender.com/url', {
+      const endpoint = searchMode === 'url' ? '/url' : '/phrase';
+      const bodyKey = searchMode === 'url' ? 'url' : 'phrase';
+      
+      const response = await fetch(`https://skincare-api-m8tt.onrender.com${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ [bodyKey]: input }),
       });
 
       if (!response.ok) {
@@ -106,6 +110,15 @@ const HomePage = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const switchMode = (mode) => {
+    if (mode !== searchMode) {
+      setSearchMode(mode);
+      setInput('');
+      setResults([]);
+      setError('');
+    }
+  };
+
   return (
     <div className="p-6 space-y-6">
       <div className="text-center mb-8">
@@ -116,25 +129,59 @@ const HomePage = () => {
       </div>
 
       <div className="bg-white rounded-3xl p-6 shadow-lg border border-pink-100">
-        <div className="flex items-center space-x-2 mb-4">
-          <Share2 className="w-5 h-5 text-pink-400" />
-          <h2 className="text-lg font-semibold text-gray-800">paste url</h2>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-2">
+            {searchMode === 'url' ? (
+              <Link strokeWidth={2.75} className="w-5 h-5 text-pink-400" />
+            ) : (
+              <Search strokeWidth={2.75} className="w-5 h-5 text-pink-400" />
+            )}
+            <h2 className="text-lg font-semibold text-gray-800">
+              {searchMode === 'url' ? 'paste video url' : 'find skincare recipes'}
+            </h2>
+          </div>
+          
+          {/* Aesthetic Toggle Switch */}
+          <div className="relative">
+            <div className="flex items-center bg-pink-50 rounded-full p-1 border border-pink-200">
+              <button
+                onClick={() => switchMode('url')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  searchMode === 'url'
+                    ? 'bg-gradient-to-r from-pink-400 to-red-500 text-white shadow-lg transform scale-105'
+                    : 'text-pink-600 hover:text-pink-700'
+                }`}
+              >
+                <Link strokeWidth={2} className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => switchMode('phrase')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  searchMode === 'phrase'
+                    ? 'bg-gradient-to-r from-pink-400 to-red-500 text-white shadow-lg transform scale-105'
+                    : 'text-pink-600 hover:text-pink-700'
+                }`}
+              >
+                <Search strokeWidth={2} className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
         
         <div className="space-y-4">
           <div className="relative">
             <input
               type="text"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="Paste YouTube Shorts URL here..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={searchMode === 'url' ? 'Paste YouTube Shorts URL here...' : 'Search for skincare products or ingredients...'}
               className="w-full px-4 py-3 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
             />
           </div>
           
           <button
-            onClick={handleUrlSubmit}
-            disabled={loading || !url.trim()}
+            onClick={handleSubmit}
+            disabled={loading || !input.trim()}
             className="w-full bg-gradient-to-r from-pink-400 to-red-500 text-white py-3 px-6 rounded-2xl font-semibold hover:from-pink-500 hover:to-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
           >
             {loading ? (
@@ -144,7 +191,7 @@ const HomePage = () => {
               </div>
             ) : (
               <div className="flex items-center justify-center space-x-2">
-                <Search className="w-5 h-5" />
+                <Sparkle strokeWidth={2.25} className="w-5 h-5"/>
                 <span>generate natural alternatives</span>
               </div>
             )}
