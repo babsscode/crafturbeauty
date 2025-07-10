@@ -174,7 +174,7 @@ const HomePage = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={searchMode === 'url' ? 'Paste YouTube Shorts URL here...' : 'Search for skincare products or ingredients...'}
+              placeholder={searchMode === 'url' ? 'paste youtube url' : 'ie: acne, aloe vera'}
               className="w-full px-4 py-3 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
             />
           </div>
