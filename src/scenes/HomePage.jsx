@@ -13,7 +13,7 @@ const HomePage = () => {
   const [savedItems, setSavedItems] = useState([]);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
-  const [searchMode, setSearchMode] = useState('url'); // 'url' or 'phrase'
+  const [searchMode, setSearchMode] = useState('phrase'); // 'url' or 'phrase'
 
   // Load saved items when component mounts
   useEffect(() => {
@@ -123,9 +123,9 @@ const HomePage = () => {
     <div className="p-6 space-y-6">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-red-600 bg-clip-text text-transparent mb-2">
-          generate recipes
+          generate skincare recipes
         </h1>
-        <p className="text-gray-600">making skincare clean and accessible 🌿</p>
+                <p className="text-gray-600">making skincare clean and accessible 🌿</p>
       </div>
 
       <div className="bg-white rounded-3xl p-6 shadow-lg border border-pink-100">
@@ -137,23 +137,13 @@ const HomePage = () => {
               <Search strokeWidth={2.75} className="w-5 h-5 text-pink-400" />
             )}
             <h2 className="text-lg font-semibold text-gray-800">
-              {searchMode === 'url' ? 'paste video url' : 'search skincare'}
+              {searchMode === 'url' ? 'find diy alternative' : 'find skincare recipe'}
             </h2>
           </div>
           
           {/* Aesthetic Toggle Switch */}
           <div className="relative">
             <div className="flex items-center bg-pink-50 rounded-full p-1 border border-pink-200">
-              <button
-                onClick={() => switchMode('url')}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  searchMode === 'url'
-                    ? 'bg-gradient-to-r from-pink-400 to-red-500 text-white shadow-lg transform scale-105'
-                    : 'text-pink-600 hover:text-pink-700'
-                }`}
-              >
-                <Link strokeWidth={2} className="w-4 h-4" />
-              </button>
               <button
                 onClick={() => switchMode('phrase')}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -163,6 +153,16 @@ const HomePage = () => {
                 }`}
               >
                 <Search strokeWidth={2} className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => switchMode('url')}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  searchMode === 'url'
+                    ? 'bg-gradient-to-r from-pink-400 to-red-500 text-white shadow-lg transform scale-105'
+                    : 'text-pink-600 hover:text-pink-700'
+                }`}
+              >
+                <Link strokeWidth={2} className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -174,7 +174,7 @@ const HomePage = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={searchMode === 'url' ? 'paste youtube url' : 'ie: acne, aloe vera'}
+              placeholder={searchMode === 'url' ? 'paste youtube video/short url' : 'ie: acne, glowing skin'}
               className="w-full px-4 py-3 border border-pink-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent"
             />
           </div>

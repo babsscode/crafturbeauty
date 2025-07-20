@@ -6,6 +6,7 @@ import HomePage from './scenes/HomePage';
 import AccountPage from './scenes/AccountPage';
 import { useAuth } from './AuthContext';
 import AppLayout from './scenes/AppLayout';
+import LandingPage from './scenes/LandingPage.jsx';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -20,6 +21,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<AuthPage />} />
+        <Route path="/landing" element={<LandingPage />} />
         <Route
           path="/home"
           element={
@@ -41,7 +43,8 @@ function App() {
           }
         />
         <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/landing" />} />
+
       </Routes>
     </Router>
   );
