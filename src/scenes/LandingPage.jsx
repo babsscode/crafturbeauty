@@ -104,7 +104,7 @@ const LandingPage = () => {
           </h1>
           
           <p className="text-lg text-gray-600 mb-2 font-medium">
-            🌿 Making skincare clean and accessible! 🌿
+            🌿 Making skincare clean and accessible!
           </p>
           <p className="text-sm text-gray-500 mb-6 max-w-lg mx-auto leading-relaxed">
             Get instant DIY recipes for any skin concern or recreate expensive products with natural ingredients
